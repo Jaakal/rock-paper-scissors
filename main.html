@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let sign_array = ["rock", "paper", "scissors"];
+        let computer_score = 0;
+        let player_score = 0;
+        let correct_value = false;
+        let player;
+        let computer;
+        let temp;
+
+        function computerPlay () {
+            return sign_array[Math.floor(Math.random() * 3)];
+        }
+
+        function play (player, computer) {
+            if (player === computer) {
+                return "draw";
+            }
+
+            switch(player) {
+                case "rock":
+                    if (computer === "paper") {
+                        return "lose";
+                    } else {
+                        return "win"
+                    }
+                    break;
+                case "paper":
+                    if (computer === "scissors") {
+                        return "lose";
+                    } else {
+                        return "win"
+                    }
+                    break;
+                case "scissors":
+                    if (computer === "rock") {
+                        return "lose";
+                    } else {
+                        return "win"
+                    }
+                    break;
+            }
+        }
+
+        for (let i = 1; i < 6; i++) {
+            while(correct_value !== true) {
+                player = prompt("Round " + i +" - Enter one: 'rock', 'paper' or 'scissors'");
+                temp = player.trim().toLowerCase();
+
+                switch(temp) {
+                    case "rock":
+                    case "paper":
+                    case "scissors":
+                    correct_value = true;    
+                    break;
+                }
+            }
+
+            computer = computerPlay();
+            temp = play(temp, computer);
+            correct_value = false;
+
+            switch(temp) {
+                case "draw":
+                    console.log("Draw! " + player + " and " + computer);
+                    break;
+                case "win":
+                    console.log("You win! " + player + " beats " + computer);
+                    player_score++;
+                    break;
+                case "lose":
+                    console.log("You lose! " + player + " loses to " + computer);
+                    computer_score++;
+                    break;
+            }
+        }
+
+        if (player_score === computer_score) {
+            console.log("After five rounds the score is draw. Score: " + player_score + " and " + computer_score);
+        } else if (player_score > computer_score) {
+            console.log("After five rounds You won. Score: " + player_score + " and " + computer_score);
+        } else {
+            console.log("After five rounds you lost. Score: " + player_score + " and " + computer_score);
+        }
+    </script>
+</body>
+</html>
